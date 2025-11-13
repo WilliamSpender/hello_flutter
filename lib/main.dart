@@ -49,11 +49,11 @@ class _OrderScreenState extends State<OrderScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () => print('Add button pressed!'),
+                  onPressed: () => _addSandwich(),
                   child: const Text('Add'),
                 ),
                 ElevatedButton(
-                  onPressed: () => print('Remove button pressed!'),
+                  onPressed: () => _removeSandwich(),
                   child: const Text('Remove'),
                 ),
               ],
@@ -62,6 +62,22 @@ class _OrderScreenState extends State<OrderScreen> {
         ),
       ),
     );
+  }
+
+  void _addSandwich() {
+    setState(() {
+      if (_quantity < widget.maxQuantity) {
+        setState(() => _quantity++);
+      }
+    });
+  }
+
+  void _removeSandwich() {
+    setState(() {
+      if (_quantity > 0) {
+        setState(() => _quantity--);
+      }
+    });
   }
 
   Container buildSandwichContainer(int quantity, String itemType) {
