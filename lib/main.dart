@@ -38,18 +38,6 @@ class App extends StatelessWidget {
     );
   }
 
-  Container buildSandwichContainer(int quantity, String itemType) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.orange,
-        border: Border.all(color: Colors.red, width: 3),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      height: 50,
-      child: OrderItemDisplay(quantity, itemType),
-    );
-  }
-
 }
 
 class OrderScreen extends StatefulWidget {
@@ -68,7 +56,47 @@ class _OrderScreenState extends State<OrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sandwich Counter'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            buildSandwichContainer(
+              _quantity,
+              'Footlong',
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () => print('Add button pressed!'),
+                  child: const Text('Add'),
+                ),
+                ElevatedButton(
+                  onPressed: () => print('Remove button pressed!'),
+                  child: const Text('Remove'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container buildSandwichContainer(int quantity, String itemType) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        border: Border.all(color: Colors.red, width: 3),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      height: 50,
+      child: OrderItemDisplay(quantity, itemType),
+    );
   }
 }
 
