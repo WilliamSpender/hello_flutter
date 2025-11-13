@@ -99,9 +99,12 @@ class OrderItemDisplay extends StatelessWidget {
 
   const OrderItemDisplay(this.quantity, this.itemType, {super.key});
 
+  String get suffix => quantity == 1 ? '' : 'es';
+
   @override
   Widget build(BuildContext context) {
-    return Text('''$quantity $itemType sandwich(es):
+    return Text('''$quantity $itemType sandwich$suffix:
     ${'🥪' * quantity}''');
   }
 }
+
