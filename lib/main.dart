@@ -134,7 +134,7 @@ class _OrderScreenState extends State<OrderScreen> {
         buttons.add(const SizedBox(width: 12));
       }
       buttons.add(ElevatedButton(
-        onPressed: () => setState(() {
+        onPressed: (_selectedBread == bread) ? null : () => setState(() {
           _selectedBread = bread;
         }),
         style: _genericButtonStyle(Colors.black),
