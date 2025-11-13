@@ -106,7 +106,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 child: ElevatedButton(
                   onPressed: _cycleSize,
                   style: _genericButtonStyle(Colors.greenAccent),
-                  child: const Text('Footlong'),
+                  child: Text(_getNextSize().label),
                 ),
               ),
             ),
@@ -188,6 +188,25 @@ class OrderItemDisplay extends StatelessWidget {
   }
 }
 
-enum SandwichSize { footlong, sixInch }
+enum SandwichSize {
+  footlong('Footlong'),
+  sixInch('Six-inch');
 
-enum BreadType { white, wheat, multigrain, sourdough, rye, glutenFree }
+  final String label;
+  const SandwichSize(this.label);
+
+  @override
+  String toString() => label;
+}
+
+enum BreadType {
+  white('White'),
+  wheat('Wheat'),
+  multigrain('Multigrain'),
+  sourdough('Sourdough'),
+  rye('Rye'),
+  glutenFree('Gluten-free');
+
+  final String label;
+  const BreadType(this.label);
+}
