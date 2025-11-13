@@ -113,6 +113,23 @@ class _OrderScreenState extends State<OrderScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: (_quantity < widget.maxQuantity) ? _addSandwich : null,
+                  style: _genericButtonStyle(Colors.greenAccent),
+                  child: const Text('Add'),
+                ),
+                const SizedBox(width: 12),
+                ElevatedButton(
+                  onPressed: (_quantity > 0) ? _removeSandwich : null,
+                  style: _genericButtonStyle(Colors.red),
+                  child: const Text('Remove'),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -191,8 +208,7 @@ class OrderItemDisplay extends StatelessWidget {
          ${'🥪' * quantity}
          Size: ${size.label}
          Bread: ${bread.label}
-         Notes:
-         ${noteLine.isEmpty ? '' : noteLine}
+         Notes:${noteLine.isEmpty ? '' : noteLine}
          ''',
           style: const TextStyle(fontSize: 16),
     );
