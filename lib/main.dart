@@ -147,7 +147,7 @@ class OrderItemDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final noteLine = note.trim().isEmpty ? '' : '\n $note';
+    final noteLine = note.trim().isEmpty ? '' : '\n$note';
     return Text(
       '$quantity $itemType sandwich$suffix:${noteLine.isEmpty ? '' : noteLine}\n${'🥪' * quantity}',
       style: const TextStyle(fontSize: 16),
