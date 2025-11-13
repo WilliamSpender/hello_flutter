@@ -86,11 +86,19 @@ class _OrderScreenState extends State<OrderScreen> {
               children: [
                 ElevatedButton(
                   onPressed: _addSandwich,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.greenAccent,
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text('Add'),
                 ),
                 const SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: _removeSandwich,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text('Remove'),
                 ),
               ],
