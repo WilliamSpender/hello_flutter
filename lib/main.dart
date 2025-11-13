@@ -116,26 +116,34 @@ class _OrderScreenState extends State<OrderScreen> {
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: (_quantity < widget.maxQuantity) ? _addSandwich : null,
-                  style: _genericButtonStyle(Colors.greenAccent),
-                  child: const Text('Add'),
-                ),
-                const SizedBox(width: 12),
-                ElevatedButton(
-                  onPressed: (_quantity > 0) ? _removeSandwich : null,
-                  style: _genericButtonStyle(Colors.red),
-                  child: const Text('Remove'),
-                ),
-              ],
+              children: _buildBreadTypeButtons(),
             ),
           ],
         ),
       ),
     );
   }
-  
+
+  List<Widget> _buildBreadTypeButtons(){
+    bool isFirst = true;
+    final buttons = <Widget>[];
+    for (final bread in BreadType.values) {
+      if(isFirst){
+        isFirst = false;
+      } else {
+        buttons.add(const SizedBox(width: 12));
+      }
+      buttons.add(ElevatedButton(
+        onPressed: () => setState(() {
+          _selectedBread = bread;
+        }),
+        style: _genericButtonStyle(Colors.black),
+        child: Text(bread.label),
+      ));
+    }
+    return buttons;
+  }
+
   ButtonStyle _genericButtonStyle(Color backgroundColor) {
     return ElevatedButton.styleFrom(
       backgroundColor: backgroundColor,
