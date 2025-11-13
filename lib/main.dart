@@ -13,42 +13,40 @@ class App extends StatelessWidget {
       title: 'Sandwich Shop App',
       home: Scaffold(
         appBar: AppBar(title: const Text('Sandwich Counter')),
-        body: Row(
+        body: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            textBaseline: TextBaseline.alphabetic,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  border: Border.all(color: Colors.red, width: 3),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                height: 50,
-                child: const OrderItemDisplay(5, 'Footlong'),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  border: Border.all(color: Colors.red, width: 3),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                height: 50,
-                child: const OrderItemDisplay(3, 'BLT Sandwich'),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  border: Border.all(color: Colors.red, width: 3),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                height: 50,
-                child: const OrderItemDisplay(7, 'CLUB Sandwich'),
+              const OrderItemDisplay(5, 'Footlong'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => print('Add button pressed!'),
+                    child: const Text('Add'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => print('Remove button pressed!'),
+                    child: const Text('Remove'),
+                  ),
+                ],
               ),
             ],
-
+          ),
         ),
       ),
+    );
+  }
+
+  Container buildSandwichContainer(int quantity, String itemType) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        border: Border.all(color: Colors.red, width: 3),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      height: 50,
+      child: OrderItemDisplay(quantity, itemType),
     );
   }
 }
