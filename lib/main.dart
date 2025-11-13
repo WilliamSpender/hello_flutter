@@ -32,6 +32,8 @@ class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
   final TextEditingController _noteController = TextEditingController();
   final List<String> _notes = [];
+  SandwichSize _selectedSize = SandwichSize.footlong;
+  BreadType _selectedBread = BreadType.white;
 
   @override
   void dispose() {
@@ -85,17 +87,28 @@ class _OrderScreenState extends State<OrderScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: _addSandwich,
+                  onPressed: (_quantity < widget.maxQuantity) ? _addSandwich : null,
                   style: _genericButtonStyle(Colors.greenAccent),
                   child: const Text('Add'),
                 ),
                 const SizedBox(width: 12),
                 ElevatedButton(
-                  onPressed: _removeSandwich,
+                  onPressed: (_quantity > 0) ? _removeSandwich : null,
                   style: _genericButtonStyle(Colors.red),
                   child: const Text('Remove'),
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 280),
+                child: ElevatedButton(
+                  onPressed: _cycleSize,
+                  style: _genericButtonStyle(Colors.greenAccent),
+                  child: const Text('Footlong'),
+                ),
+              ),
             ),
           ],
         ),
@@ -106,6 +119,7 @@ class _OrderScreenState extends State<OrderScreen> {
   ButtonStyle _genericButtonStyle(Color backgroundColor) {
     return ElevatedButton.styleFrom(
       backgroundColor: backgroundColor,
+      disabledBackgroundColor: Colors.grey,
       foregroundColor: Colors.white,
     );
   }
@@ -114,6 +128,24 @@ class _OrderScreenState extends State<OrderScreen> {
     if (_quantity < widget.maxQuantity) {
       setState(() => _quantity++);
     }
+  }
+
+  void _cycleSize() {
+    setState(() {
+      _selectedSize = _getNextSize();
+    });
+  }
+
+  SandwichSize _getNextSize() {
+    return SandwichSize.values[
+    (_selectedSize.index + 1) % SandwichSize.values.length];
+  }
+
+  void _cycleBread() {
+    setState(() {
+      _selectedBread = BreadType.values[
+          (_selectedBread.index + 1) % BreadType.values.length];
+    });
   }
 
   void _removeSandwich() {
@@ -155,3 +187,7 @@ class OrderItemDisplay extends StatelessWidget {
     );
   }
 }
+
+enum SandwichSize { footlong, sixInch }
+
+enum BreadType { white, wheat, multigrain, sourdough, rye, glutenFree }
