@@ -101,13 +101,14 @@ class _OrderScreenState extends State<OrderScreen> {
                 ),
               ],
             ),
+            const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 280),
                 child: ElevatedButton(
                   onPressed: _cycleSize,
-                  style: _genericButtonStyle(Colors.greenAccent),
+                  style: _genericButtonStyle(Colors.black),
                   child: Text(_getNextSize().label),
                 ),
               ),
@@ -187,12 +188,12 @@ class OrderItemDisplay extends StatelessWidget {
     final noteLine = note.trim().isEmpty ? '' : '\n$note';
     return Text(
       '''$quantity $itemType sandwich$suffix:
-          ${'🥪' * quantity}
-          Size: ${size.label}
-          Bread: ${bread.label}
-          Notes:
-          ${noteLine.isEmpty ? '' : noteLine}
-          ''',
+         ${'🥪' * quantity}
+         Size: ${size.label}
+         Bread: ${bread.label}
+         Notes:
+         ${noteLine.isEmpty ? '' : noteLine}
+         ''',
           style: const TextStyle(fontSize: 16),
     );
   }
