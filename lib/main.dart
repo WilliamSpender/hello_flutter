@@ -173,6 +173,11 @@ class _OrderScreenState extends State<OrderScreen> {
     if (_quantity > 0) {
       setState(() => _quantity--);
     }
+    if(_quantity == 0){
+      setState(() {
+        _notes.clear();
+      });
+    }
   }
 
   Container buildSandwichContainer(int quantity, String itemType, SandwichSize sandwichSize, BreadType breadType, String note) {
