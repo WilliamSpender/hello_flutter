@@ -54,6 +54,8 @@ class _OrderScreenState extends State<OrderScreen> {
             buildSandwichContainer(
               _quantity,
               'Footlong',
+                _selectedSize,
+                _selectedBread,
                 _notes.join('\n')
             ),
             const SizedBox(height: 8),
@@ -154,7 +156,7 @@ class _OrderScreenState extends State<OrderScreen> {
     }
   }
 
-  Container buildSandwichContainer(int quantity, String itemType, String note) {
+  Container buildSandwichContainer(int quantity, String itemType, SandwichSize sandwichSize, BreadType breadType, String note) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.orange,
@@ -163,7 +165,7 @@ class _OrderScreenState extends State<OrderScreen> {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       // No fixed height so the container grows with the text
-      child: OrderItemDisplay(quantity, itemType, note: note),
+      child: OrderItemDisplay(quantity, itemType, sandwichSize, breadType, note: note),
     );
   }
 }
@@ -172,8 +174,10 @@ class OrderItemDisplay extends StatelessWidget {
   final String itemType;
   final int quantity;
   final String note;
+  final SandwichSize size;
+  final BreadType bread;
 
-  const OrderItemDisplay(this.quantity, this.itemType,
+  const OrderItemDisplay(this.quantity, this.itemType, this.size, this.bread,
       {this.note = '', super.key});
 
   String get suffix => quantity == 1 ? '' : 'es';
@@ -182,8 +186,14 @@ class OrderItemDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     final noteLine = note.trim().isEmpty ? '' : '\n$note';
     return Text(
-      '$quantity $itemType sandwich$suffix:${noteLine.isEmpty ? '' : noteLine}\n${'🥪' * quantity}',
-      style: const TextStyle(fontSize: 16),
+      '''$quantity $itemType sandwich$suffix:
+          ${'🥪' * quantity}
+          Size: ${size.label}
+          Bread: ${bread.label}
+          Notes:
+          ${noteLine.isEmpty ? '' : noteLine}
+          ''',
+          style: const TextStyle(fontSize: 16),
     );
   }
 }
