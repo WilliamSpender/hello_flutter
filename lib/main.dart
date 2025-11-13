@@ -169,13 +169,6 @@ class _OrderScreenState extends State<OrderScreen> {
     (_selectedSize.index + 1) % SandwichSize.values.length];
   }
 
-  void _cycleBread() {
-    setState(() {
-      _selectedBread = BreadType.values[
-          (_selectedBread.index + 1) % BreadType.values.length];
-    });
-  }
-
   void _removeSandwich() {
     if (_quantity > 0) {
       setState(() => _quantity--);
