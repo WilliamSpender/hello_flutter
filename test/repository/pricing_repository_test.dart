@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sandwich_shop/repositories/order_repository.dart';
+import 'package:sandwich_shop/repositories/pricing_repository.dart';
 
 void main() {
   group('PricingRepository', () {
     test('Price should be 0 with no sandwiches', () {
-      final repository = PricingRepository(maxQuantity: 5);
-      expect(repository.quantity, 0);
+      final repository = PricingRepository(currency: "£");
+      expect(repository.getPrice(false,0), 0);
     });
 
     test('increment should increase quantity by 1', () {
