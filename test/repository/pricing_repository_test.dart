@@ -17,4 +17,14 @@ void main() {
       final repository = PricingRepository(currency: "£");
       expect(repository.getPrice(false, 1), 7);
     });
+
+  test('Price should be 33 for 3 footlong', () {
+      final repository = PricingRepository(currency: "£");
+      expect(repository.getPrice(true, 3), 33);
+    });
+
+  test('Price should be 35 for 5 6-inch', () {
+      final repository = PricingRepository(currency: "£");
+      expect(repository.getPrice(false, 5), 35);
+    });
 }
