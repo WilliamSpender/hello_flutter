@@ -88,7 +88,7 @@ void main() {
 
       expect(find.textContaining('footlong sandwich'), findsOneWidget);
 
-      final sizeSwitch = find.byKey(const Key('T'));
+      final sizeSwitch = find.byKey(const Key('S'));
       expect(sizeSwitch, findsOneWidget);
 
       await tester.tap(sizeSwitch);

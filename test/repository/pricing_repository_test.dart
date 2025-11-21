@@ -27,4 +27,5 @@ void main() {
       final repository = PricingRepository(currency: "£");
       expect(repository.getPrice(false, 5), 35);
     });
+  });
 }
