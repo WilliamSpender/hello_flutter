@@ -81,6 +81,21 @@ void main() {
       await tester.pump();
       expect(find.text('Note: Extra mayo'), findsOneWidget);
     });
+
+    // dart
+    testWidgets('changes sandwich size with switch', (WidgetTester tester) async {
+      await tester.pumpWidget(const App());
+
+      expect(find.textContaining('footlong sandwich'), findsOneWidget);
+      final switchFinder = find.byType(Switch);
+      expect(switchFinder, findsOneWidget);
+      await tester.tap(switchFinder);
+      await tester.pumpAndSettle();
+      expect(find.textContaining('six-inch sandwich'), findsOneWidget);
+      await tester.tap(switchFinder);
+      await tester.pumpAndSettle();
+      expect(find.textContaining('footlong sandwich'), findsOneWidget);
+    });
   });
 
   group('StyledButton', () {
