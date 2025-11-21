@@ -82,7 +82,6 @@ void main() {
       expect(find.text('Note: Extra mayo'), findsOneWidget);
     });
 
-    // dart
     testWidgets('changes sandwich size with switch', (WidgetTester tester) async {
       await tester.pumpWidget(const App());
 
@@ -98,6 +97,23 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.textContaining('footlong sandwich'), findsOneWidget);
     });
+
+        testWidgets('toggle toast sandwiches', (WidgetTester tester) async {
+      await tester.pumpWidget(const App());
+
+      expect(find.textContaining(' sandwich'), findsOneWidget);
+
+      final sizeSwitch = find.byKey(const Key('T'));
+      expect(sizeSwitch, findsOneWidget);
+
+      await tester.tap(sizeSwitch);
+      await tester.pumpAndSettle();
+      expect(find.textContaining('toasted sandwich'), findsOneWidget);
+      await tester.tap(sizeSwitch);
+      await tester.pumpAndSettle();
+      expect(find.textContaining(' sandwich'), findsOneWidget);
+    });
+    
   });
 
   group('StyledButton', () {
@@ -126,6 +142,7 @@ void main() {
             itemType: 'footlong',
             breadType: BreadType.white,
             orderNote: 'No notes added.',orderPrice: 1,
+            isToasted: false,
           );
           const testApp = MaterialApp(
             home: Scaffold(body: widgetToBeTested),
@@ -142,6 +159,7 @@ void main() {
             itemType: 'footlong',
             breadType: BreadType.white,
             orderNote: 'No notes added.',orderPrice: 1,
+            isToasted: false,
           );
           const testApp = MaterialApp(
             home: Scaffold(body: widgetToBeTested),
@@ -159,6 +177,7 @@ void main() {
             itemType: 'six-inch',
             breadType: BreadType.wheat,
             orderNote: 'No pickles',orderPrice: 1,
+            isToasted: false,
           );
           const testApp = MaterialApp(
             home: Scaffold(body: widgetToBeTested),
@@ -175,6 +194,7 @@ void main() {
             itemType: 'footlong',
             breadType: BreadType.wholemeal,
             orderNote: 'Lots of lettuce', orderPrice: 1,
+            isToasted: false,
           );
           const testApp = MaterialApp(
             home: Scaffold(body: widgetToBeTested),
