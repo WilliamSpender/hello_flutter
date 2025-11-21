@@ -2,9 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sandwich_shop/repositories/order_repository.dart';
 
 void main() {
-  group('OrderRepository', () {
-    test('initial quantity should be 0', () {
-      final repository = OrderRepository(maxQuantity: 5);
+  group('PricingRepository', () {
+    test('Price should be 0 with no sandwiches', () {
+      final repository = PricingRepository(maxQuantity: 5);
       expect(repository.quantity, 0);
     });
 
