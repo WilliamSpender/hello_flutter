@@ -128,6 +128,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 const Text('six-inch', style: normalText),
                 Switch(
                   value: _isFootlong,
+                  key: const Key('S'),
                   onChanged: _onSandwichTypeChanged,
                 ),
                 const Text('footlong', style: normalText),
@@ -139,6 +140,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 const Text('untoasted', style: normalText),
                 Switch(
                   value: _isToasted,
+                  key: const Key('T'),
                   onChanged: (value) {
                     setState(() => _isToasted = value);
                   },

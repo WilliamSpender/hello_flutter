@@ -87,12 +87,14 @@ void main() {
       await tester.pumpWidget(const App());
 
       expect(find.textContaining('footlong sandwich'), findsOneWidget);
-      final switchFinder = find.byType(Switch);
-      expect(switchFinder, findsOneWidget);
-      await tester.tap(switchFinder);
+
+      final sizeSwitch = find.byKey(const Key('T'));
+      expect(sizeSwitch, findsOneWidget);
+
+      await tester.tap(sizeSwitch);
       await tester.pumpAndSettle();
       expect(find.textContaining('six-inch sandwich'), findsOneWidget);
-      await tester.tap(switchFinder);
+      await tester.tap(sizeSwitch);
       await tester.pumpAndSettle();
       expect(find.textContaining('footlong sandwich'), findsOneWidget);
     });
