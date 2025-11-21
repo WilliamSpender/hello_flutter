@@ -8,31 +8,13 @@ void main() {
       expect(repository.getPrice(false,0), 0);
     });
 
-    test('increment should increase quantity by 1', () {
-      final repository = OrderRepository(maxQuantity: 5);
-      repository.increment();
-      expect(repository.quantity, 1);
+  test('Price should be 11 for 1 footlong', () {
+      final repository = PricingRepository(currency: "£");
+      expect(repository.getPrice(true, 1), 11);
     });
 
-    test('decrement should decrease quantity by 1', () {
-      final repository = OrderRepository(maxQuantity: 5);
-      repository.increment(); // quantity is now 1
-      repository.decrement(); // quantity is now 0
-      expect(repository.quantity, 0);
+  test('Price should be 7 for 1 6-inch', () {
+      final repository = PricingRepository(currency: "£");
+      expect(repository.getPrice(false, 1), 7);
     });
-
-    test('quantity should not exceed maxQuantity', () {
-      final repository = OrderRepository(maxQuantity: 2);
-      repository.increment(); // quantity is 1
-      repository.increment(); // quantity is 2
-      repository.increment(); // should not change
-      expect(repository.quantity, 2);
-    });
-
-    test('quantity should not go below 0', () {
-      final repository = OrderRepository(maxQuantity: 5);
-      repository.decrement(); // should not change
-      expect(repository.quantity, 0);
-    });
-  });
 }
