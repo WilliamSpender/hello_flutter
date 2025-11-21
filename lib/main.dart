@@ -1,5 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-import 'package:sandwich_shop/views/app_styles.dart';
+import 'package:sandwich_shop/repositories/pricing_repository.dart';
 import 'package:sandwich_shop/views/app_styles.dart';
 import 'package:sandwich_shop/repositories/order_repository.dart';
 
@@ -34,6 +36,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   late final OrderRepository _orderRepository;
+  late final PricingRepository _pricingRepository;
   final TextEditingController _notesController = TextEditingController();
   bool _isFootlong = true;
   bool _isToasted = true;
@@ -43,6 +46,10 @@ class _OrderScreenState extends State<OrderScreen> {
   void initState() {
     super.initState();
     _orderRepository = OrderRepository(maxQuantity: widget.maxQuantity);
+    _notesController.addListener(() {
+      setState(() {});
+    });
+    _pricingRepository = PricingRepository(currency: "£");
     _notesController.addListener(() {
       setState(() {});
     });
@@ -120,6 +127,7 @@ class _OrderScreenState extends State<OrderScreen> {
               itemType: sandwichType,
               breadType: _selectedBreadType,
               orderNote: noteForDisplay,
+              orderPrice: _pricingRepository.getPrice(_isFootlong, _orderRepository.quantity),
             ),
             const SizedBox(height: 20),
             Row(
@@ -233,6 +241,7 @@ class OrderItemDisplay extends StatelessWidget {
   final String itemType;
   final BreadType breadType;
   final String orderNote;
+  final double orderPrice;
 
   const OrderItemDisplay({
     super.key,
@@ -240,6 +249,7 @@ class OrderItemDisplay extends StatelessWidget {
     required this.itemType,
     required this.breadType,
     required this.orderNote,
+    required this.orderPrice,
   });
 
   @override
@@ -251,6 +261,10 @@ class OrderItemDisplay extends StatelessWidget {
       children: [
         Text(
           displayText,
+          style: normalText,
+        ),
+        Text(
+          'Price: £ $orderPrice',
           style: normalText,
         ),
         const SizedBox(height: 8),
